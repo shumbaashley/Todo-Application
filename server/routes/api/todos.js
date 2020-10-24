@@ -39,6 +39,18 @@ router.get('/:todoId', async (req,res)=>{
     }
 });
 
+// MARK SPECIFIC TODO COMPLETE
+router.put('/:todoId', async (req,res)=>{
+    try {
+        const completedTodo = await Todo.updateOne({"_id" : req.params.todoId}, {$set : {"done" : req.body.done}});
+        res.json(completedTodo)
+    } catch (err) {
+        res.json(err)
+    }
+});
+
+
+
 // UPDATE SPECIFIC TODO
 router.patch('/:todoId', async (req,res)=>{
     try {
@@ -52,7 +64,7 @@ router.patch('/:todoId', async (req,res)=>{
 // DELETE A TODO
 router.delete('/:todoId', async (req,res) => {
     try {
-        const result = await Todo.remove({"_id" : req.params.todoId})
+        const result = await Todo.deleteOne({"_id" : req.params.todoId})
         res.json(result)
     } catch (err) {
         
