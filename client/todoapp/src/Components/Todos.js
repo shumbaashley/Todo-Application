@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import React from 'react';
 import Todo from './Todo'
-import Alert from './Alert';
 
 
-function Todos() {
-
-    const [todos, setTodos] = useState(null);
-    
-    const url = "http://localhost:5000/api/todos"
-    useEffect(() => {
-        axios.get(url)
-        .then(res => setTodos(res.data))
-        .catch(() => <Alert message="There was some error."/>)
-    }, [url]);
+function Todos({todos, handleDelete, toggleDone}) {
 
 
     if(todos){
@@ -27,6 +16,8 @@ function Todos() {
                                     id={todo._id}
                                     todo={todo.todo}
                                     done={todo.done}
+                                    handleDelete={handleDelete}
+                                    toggleDone={toggleDone}
                                 ></Todo>
                                         
                             )
