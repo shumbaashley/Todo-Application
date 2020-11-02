@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Todo from './Todo'
+import Alert from './Alert';
 
 
 function Todos() {
@@ -11,8 +12,7 @@ function Todos() {
     useEffect(() => {
         axios.get(url)
         .then(res => setTodos(res.data))
-        .catch(() => alert("There was some error.")
-        )
+        .catch(() => <Alert message="There was some error."/>)
     }, [url]);
 
 
@@ -38,7 +38,8 @@ function Todos() {
     }
 
     return (
-        <p>Loading...</p>
+        <p class="loader"></p>
+
     )
 
 }

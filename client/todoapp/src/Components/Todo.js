@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from "axios"
+import Alert from "./Alert";
+
 
 function Todo(props) {
     let name 
@@ -12,15 +14,15 @@ function Todo(props) {
     
     function deleteTodo(todo){
         axios.delete(url + `/${todo}`)
-        .then((res => {alert("Successfully deleted!")}))
-        .catch(()=>alert("There was some error."))
+        .then((res => <Alert message="Successfully deleted!"/>))
+        .catch(()=><Alert message="There was some error."/>)
     }
 
     function handleCompleted(todo){
 
         axios.put(url + `/${todo}`, {"done" : !props.done})
-        .then((res => {alert("Updated")}))
-        .catch(() => alert("There was some error"))
+        .then((res => <Alert message="Updated."/>))
+        .catch(() => <Alert message="There was some error."/>)
 
     }
 
