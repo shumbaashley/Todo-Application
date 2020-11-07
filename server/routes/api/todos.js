@@ -42,7 +42,7 @@ router.get('/:todoId', async (req,res)=>{
 // MARK SPECIFIC TODO COMPLETE
 router.put('/:todoId', async (req,res)=>{
     try {
-        const completedTodo = await Todo.updateOne({"_id" : req.params.todoId}, {$set : {"done" : req.body.done}});
+        const completedTodo = await Todo.updateOne({"_id" : req.params.todoId}, {$set : {"done" : req.body.done}}, {new : true});
         res.json(completedTodo)
     } catch (err) {
         res.json(err)

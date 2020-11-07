@@ -2,40 +2,36 @@ import React from 'react';
 import './App.css';
 import { fetchTodos, postTodo, toggleComplete, deleteTodo} from './api'
 import Todos from './Components/Todos';
-import {} from './api'
+ 
 class App extends React.Component {
   state = {
     todos : [],
     todo : ''
   }
 
-    
+
    handleChange = (event) => {
       this.setState({todo: event.target.value});
   }
   
    handleSubmit = async (event) => {
       event.preventDefault();
-      const response = await postTodo(this.state.todo)
+      await postTodo(this.state.todo)
       const fetchedTodos = await fetchTodos()
       this.setState({todos : fetchedTodos, todo : ''})
-      console.log(response)
-
   }
 
   toggleDone = async (id, done) => {
-    const response =  await toggleComplete(id)
+    await toggleComplete(id, done)
     const fetchedTodos = await fetchTodos()
     this.setState({todos : fetchedTodos})
-    console.log(response)
 
   }
 
   handleDelete = async (id) => {
-    const response = await deleteTodo(id)
+    await deleteTodo(id)
     const fetchedTodos = await fetchTodos()
     this.setState({todos : fetchedTodos})
-    console.log(response)
   }
 
   async componentDidMount(){
